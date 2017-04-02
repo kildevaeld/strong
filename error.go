@@ -3,10 +3,9 @@ package strong
 import (
 	"encoding/json"
 	"errors"
-
-	"github.com/kildevaeld/dict"
 )
 
+// HttpError Represents a http error
 type HttpError struct {
 	code    int
 	message string
@@ -25,7 +24,7 @@ func (self *HttpError) Code() int {
 }
 
 func (self *HttpError) MarshalJSON() ([]byte, error) {
-	return json.Marshal(dict.Map{
+	return json.Marshal(map[string]interface{}{
 		"code":    self.code,
 		"message": self.message,
 	})
