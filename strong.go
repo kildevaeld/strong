@@ -48,6 +48,7 @@ const (
 	HeaderCookie                        = "Cookie"
 	HeaderSetCookie                     = "Set-Cookie"
 	HeaderIfModifiedSince               = "If-Modified-Since"
+	HeaderIfNoneMatch                   = "If-None-Match"
 	HeaderLastModified                  = "Last-Modified"
 	HeaderLocation                      = "Location"
 	HeaderUpgrade                       = "Upgrade"
