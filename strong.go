@@ -60,6 +60,8 @@ const (
 	HeaderXRealIP                       = "X-Real-IP"
 	HeaderServer                        = "Server"
 	HeaderOrigin                        = "Origin"
+	HeaderCacheControl                  = "Cache-Control"
+	HeaderETag                          = "Etag"
 	HeaderAccessControlRequestMethod    = "Access-Control-Request-Method"
 	HeaderAccessControlRequestHeaders   = "Access-Control-Request-Headers"
 	HeaderAccessControlAllowOrigin      = "Access-Control-Allow-Origin"
@@ -68,6 +70,8 @@ const (
 	HeaderAccessControlAllowCredentials = "Access-Control-Allow-Credentials"
 	HeaderAccessControlExposeHeaders    = "Access-Control-Expose-Headers"
 	HeaderAccessControlMaxAge           = "Access-Control-Max-Age"
+
+	HeaderLink = "Link"
 
 	// Security
 	HeaderStrictTransportSecurity = "Strict-Transport-Security"

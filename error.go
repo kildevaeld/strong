@@ -3,40 +3,60 @@ package strong
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 )
 
 // HttpError Represents a http error
 type HttpError struct {
-	code    int
+	status  int
+	err     string
 	message string
 }
 
 func (self *HttpError) Error() string {
-	return self.message
+	return self.err
 }
 
 func (self *HttpError) Message() string {
 	return self.message
 }
 
-func (self *HttpError) Code() int {
-	return self.code
+func (self *HttpError) StatusCode() int {
+	return self.status
 }
 
 func (self *HttpError) MarshalJSON() ([]byte, error) {
-	return json.Marshal(map[string]interface{}{
-		"code":    self.code,
-		"message": self.message,
-	})
+	return json.Marshal(self.ToMap())
 }
 
-func NewHTTPError(code int, msg ...string) error {
-	m := StatusText(code)
-	if len(msg) != 0 {
-		m = msg[0]
+func (self *HttpError) ToMap() map[string]interface{} {
+	m := map[string]interface{}{
+		"status": self.status,
+		"error":  self.err,
 	}
 
-	return &HttpError{code, m}
+	if self.message != "" {
+		m["message"] = self.message
+	}
+	return m
+}
+
+func NewHTTPError(code int, msg ...interface{}) error {
+	m := StatusText(code)
+	var msgStr string
+	if len(msg) != 0 {
+		var ok bool
+		msgStr, ok = msg[0].(string)
+		if !ok {
+			panic("first argument must be a string")
+		}
+		if len(msg) > 1 {
+			msgStr = fmt.Sprintf(msgStr, msg[1:]...)
+		}
+
+	}
+
+	return &HttpError{code, m, msgStr}
 }
 
 var (
