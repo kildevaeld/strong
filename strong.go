@@ -236,3 +236,27 @@ var statusText = map[int]string{
 func StatusText(code int) string {
 	return statusText[code]
 }
+
+func IsInformal(code int) bool {
+	return code >= 100 && code < 200
+}
+
+func IsSuccess(code int) bool {
+	return code >= 200 && code < 300
+}
+
+func IsRedirection(code int) bool {
+	return code >= 300 && code < 400
+}
+
+func IsClientError(code int) bool {
+	return code >= 400 && code < 500
+}
+
+func IsServerError(code int) bool {
+	return code >= 500
+}
+
+func IsError(code int) bool {
+	return IsClientError(code) || IsServerError(code)
+}
